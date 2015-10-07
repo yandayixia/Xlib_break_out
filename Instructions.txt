@@ -1,8 +1,8 @@
 ******Three ways of running the program
-=>run the actual game from level 1, using default setting(60fps, 7 piexel per frame)
+=>run the actual game from level 1, using default setting(60fps, 200 piexel per second)
 make run
 
-=>run the actual game from _level_num, using default setting(60fps, 7 piexel per frame)
+=>run the actual game from _level_num, using default setting(60fps, 200 piexel per second)
 ./a1 _level_num
 
 =>run the actual game from level 1 using customized setting(???fps, ??? piexel per second)

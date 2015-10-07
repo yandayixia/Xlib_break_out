@@ -1,9 +1,9 @@
 CXX = g++
 CXXFLAGS = -g
 ENDFLAGS = -lX11
-EXEC = a1
+EXEC = Break_Out
 BLOCK = Source_Code/BaseBlock.cpp Source_Code/GameObject.cpp Source_Code/InputManager.cpp Source_Code/Paddle.cpp Source_Code/Orb.cpp Source_Code/TemplateObject.cpp Source_Code/GameManager.cpp Source_Code/IronBlock.cpp
-SOURCES = ${BLOCK} a1.cpp
+SOURCES = ${BLOCK} Main_Game.cpp
 OBJECTS = ${SOURCES:.cpp=.o}
 
 all: $(SOURCES) $(EXEC)

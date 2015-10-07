@@ -1,18 +1,18 @@
 /*
- * NAME: Yan Rui
- * USERID: r23yan
+ * Author: Yandayixia
  *
- * Fall 2015 CS349 Assignment 1:  An implementation of Breakout in C/C++ and Xlib.
- * 
- * 
+ * Disclaimer:
+ * Original Game crated as a CS349 Assignment. for the university of waterloo.
+ * Plenty of new features, levels, are contents are added for the pure pleasure
+ * of coding insanity and joy and pain and suffering. Sleep is not requested.
  *
- * Commands to compile and run:
- *  g++ -o a1 a1.cpp -lX11
- *  or
- *  g++ -o a1 a1.cpp -L/usr/X11R6/lib -lX11 -lstdc++
- *  ./a1
+ * To build the game, execute the make file with command:
+ * $=>make
+ * or
+ * $=>make run
+ * if your want to execute the game right after build.
  *
- * Note: the -L option and -lstdc++ may not be needed on some machines.
+ * See the REAMME file for details of, cheats, and features.
  */
 
 
@@ -733,13 +733,9 @@ void StartScreen(XInfo& myInfo, XFont& myFont){
         //draw the text fields
         string to_print = "";
 
-        to_print = "Coder: Yan Rui";
+        to_print = "By: Yandayixia the Cursed One";
         XDrawString (myInfo.display, myInfo.pixmap, myInfo.color_gc[7],
                      3, 15, to_print.c_str(), to_print.length());
-
-        to_print = "ID: r23yan";
-        XDrawString (myInfo.display, myInfo.pixmap, myInfo.color_gc[7],
-                     3, 30, to_print.c_str(), to_print.length());
 
         to_print = "How to Play:";
         XDrawString (myInfo.display, myInfo.pixmap, myInfo.color_gc[0],
@@ -810,6 +806,9 @@ int main ( int argc, char* argv[] ) {
         //argv[0] = ./a1
         //argv[1] = input_FPS
         //argv[2] = input_SPD
+        //argv[3] = input_Level
+
+
         if(argc == 3){
             //frame per second
             double input_FPS = to_num(argv[1]);
@@ -826,7 +825,6 @@ int main ( int argc, char* argv[] ) {
 
             cout << "input_FPS: " << GameManager::Target_FPS << endl;
             cout << "input_SPD: " << input_SPD << endl;    
-
         }else if(argc == 4){
             //frame per second
             double input_FPS = to_num(argv[1]);
@@ -844,16 +842,36 @@ int main ( int argc, char* argv[] ) {
             GameManager::Ball_SPD = desired_fSPD;
             cout << "input_FPS: " << GameManager::Target_FPS << endl;
             cout << "input_SPD: " << input_SPD << endl;    
-            cout << "target_level: " << target_level << endl;  
-
+            cout << "target_level: " << target_level << endl;
         }else if(argc == 2){
             target_level = to_num(argv[1]);
             cout << "target_level: " << target_level << endl; 
+            double input_SPD = 200;
+            const long double ms_per_second = 1000000.0f; 
+            long double desired_ftime = ms_per_second / GameManager::Target_FPS; //micro second / frame
+            long double desired_fPixel = ms_per_second / input_SPD; //ms/ pixel
+            long double desired_fSPD = desired_ftime / desired_fPixel;
+            GameManager::Ball_SPD = desired_fSPD;
+
+        }else if(argc == 1){
+            
+            double input_SPD = 200;
+            const long double ms_per_second = 1000000.0f; 
+            long double desired_ftime = ms_per_second / GameManager::Target_FPS; //micro second / frame
+            long double desired_fPixel = ms_per_second / input_SPD; //ms/ pixel
+            long double desired_fSPD = desired_ftime / desired_fPixel;
+            GameManager::Ball_SPD = desired_fSPD;
         }else{
             cout << "invalid parameter number, use default value." << endl;
             for(int i =0; i < argc; i++){
                 cout << argv[i] << endl;
             }
+            double input_SPD = 200;
+            const long double ms_per_second = 1000000.0f; 
+            long double desired_ftime = ms_per_second / GameManager::Target_FPS; //micro second / frame
+            long double desired_fPixel = ms_per_second / input_SPD; //ms/ pixel
+            long double desired_fSPD = desired_ftime / desired_fPixel;
+            GameManager::Ball_SPD = desired_fSPD;
         }
 
         XInfo xInfo;
